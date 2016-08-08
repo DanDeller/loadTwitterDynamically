@@ -30,8 +30,8 @@
 
           $('.stock-name').text(data.company.name);
 
-          loadScript(myPrettyCode);
-          myPrettyCode(data.company.twitter_name);
+          loadScripts(setTwitterHandle,"//platform.twitter.com/widgets.js");
+          setTwitterHandle(data.company.twitter_name);
 
           $('.up-top, .full-story, up-top, .full-story-rate, .company-image').removeClass('hide');
 
@@ -44,23 +44,23 @@
 
     }); // end on click
 
-    function loadScript(callback) {
+    function loadScripts(callback, src) {
       var head = document.getElementsByTagName('head')[0],
           script = document.createElement('script');
 
       script.type = 'text/javascript';
-      script.src="//platform.twitter.com/widgets.js";
+      script.src = src;
       
       // bind the event to the callback function
       script.onreadystatechange = callback;
       script.onload = callback;
 
-      $('.load-here').append(script);
+      $('.load-twitter-here').append(script);
     }
 
-    var myPrettyCode = function(handle) {
+    function setTwitterHandle(handle) {
       var handleBox = $('.twitter-hold');
-      $('.load-here').html(
+      $('.load-twitter-here').html(
         '<a id="twitter-feed" class="twitter-timeline" data-tweet-limit=3 href="' + handle + '"></a> '
         );
     }
